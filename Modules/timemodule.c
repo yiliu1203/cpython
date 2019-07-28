@@ -803,6 +803,12 @@ inittimezone(PyObject *m) {
 
     And I'm lazy and hate C so nyer.
      */
+
+#if defined _MSC_VER && _MSC_VER >= 1900
+#define timezone _timezone
+#define tzname _tzname
+#define daylight _daylight
+#endif
 #if defined(HAVE_TZNAME) && !defined(__GLIBC__) && !defined(__CYGWIN__)
     tzset();
 #ifdef PYOS_OS2
